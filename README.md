@@ -15,7 +15,7 @@ then activate it (depends on system)
 cd backend
 python manage.py startapp YOURAPP_NAME
 ```
-then add your app in settings.py under backend
+then add your app in settings.py under backend and urls.py
 ## Now check if it is workin:
 
 #### Build docker
