@@ -1,0 +1,6 @@
+django>=4,<5
+markdown
+django-filter
+celery[redis]
+psycopg2-binary
+
