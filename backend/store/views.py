@@ -5,8 +5,7 @@ from django.http.response import (
     JsonResponse,
     HttpResponse,
 )
-from django.shortcuts import render
 
 
-def testView():
+def testView(request):
     return JsonResponse({"message": "Test ok"}, status=200)
