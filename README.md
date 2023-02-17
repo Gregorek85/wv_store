@@ -1,7 +1,4 @@
-# Boilerplate with Docker Compose for Django, Celery, Redis, and Postgres
-
-Based on article with implemenation details: [Docker compose with Django 4, Celery, Redis and Postgres](https://saasitive.com/tutorial/django-celery-redis-postgres-docker-compose/)
-
+# Building simple e-commerce site for my side job.
 
 This boilerplate uses Python 3.11 and Django 4. Create your venv using Python 3.11
 #### Create venv
