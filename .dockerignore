@@ -1,0 +1,6 @@
+/backend/*.bat
+/backend/*sqlite3
+*.txt
+!requirements.txt
+Dockerfile
+.dockerignore

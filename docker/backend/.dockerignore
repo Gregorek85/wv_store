@@ -1,5 +1,0 @@
-#Files here are also ignored in ADD / COPY
-Dockerfile
-.dockerignore
-db.sqlite3
-*.bat
