@@ -9,7 +9,9 @@ services:
             - static_volume:/app/backend/django_static
     server:
         restart: unless-stopped
-        build: .
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
         entrypoint: /app/docker/backend/server-entrypoint.sh
         volumes:
             - static_volume:/app/backend/django_static
@@ -27,7 +29,9 @@ services:
             POSTGRES_PORT: 5432
     worker:
         restart: unless-stopped
-        build: .
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
         entrypoint: /app/docker/backend/worker-entrypoint.sh
         volumes:
             - static_volume:/app/backend/django_static
