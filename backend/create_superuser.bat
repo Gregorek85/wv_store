@@ -1,0 +1,1 @@
+docker exec -it  wv_site-server-1 python /app/backend/manage.py createsuperuser

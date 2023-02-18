@@ -1,4 +1,4 @@
 django>=4,<5
 celery[redis]
 psycopg2-binary
-
+Pillow
