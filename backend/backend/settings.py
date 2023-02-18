@@ -29,6 +29,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DEBUG", True)
 
 ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
+# AUTH_USER_MODEL = "accounts.CustomUser"
 
 if os.environ.get("ALLOWED_HOSTS") is not None:
     try:
@@ -36,17 +37,55 @@ if os.environ.get("ALLOWED_HOSTS") is not None:
     except Exception as e:
         print("Cant set ALLOWED_HOSTS, using default instead")
 
-# Application definition
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
+# Application definition
+LOGIN_REDIRECT_URL = "main"
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
+    # "accounts",
+    "django.contrib.messages",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.microsoft",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_bootstrap5",
     "store",
 ]
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {"client_id": "YOUR_CLIENT_ID", "secret": "YOUR_SECRET_KEY", "key": ""},
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    },
+    "microsoft": {
+        "APP": {"client_id": "YOUR_CLIENT_ID", "secret": "YOUR_SECRET_KEY", "key": ""},
+        "SCOPE": [
+            "User.Read",
+            "User.ReadBasic.All",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    },
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

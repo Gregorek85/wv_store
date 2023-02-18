@@ -1,6 +1,22 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
-import math
+
+# from accounts.models import CustomUser
+
+
+class Currency(models.Model):
+    short_name = models.CharField(
+        blank=False, max_length=64, help_text="Abbr for this currency (i.e. EUR)"
+    )
+    long_name = models.CharField(
+        blank=False, max_length=64, help_text="Long name for this currency (i.e. Euro)"
+    )
+    relation_to_PLN = models.PositiveSmallIntegerField(
+        help_text="Price in PLN for 1 in this currency"
+    )
+
+    def __str__(self) -> str:
+        return f"{self.long_name} ({self.short_name})"
 
 
 class myAbstractModel(models.Model):
@@ -33,24 +49,12 @@ class HashTag(myAbstractModel):
         return f"#{self.name}"
 
 
-class Currencies(myAbstractModel):
-    short_name = models.CharField(
-        blank=False, max_length=64, help_text="Abbr for this currency (i.e. EUR)"
-    )
-    long_name = models.CharField(
-        blank=False, max_length=64, help_text="Long name for this currency (i.e. Euro)"
-    )
-    relation_to_PLN = models.PositiveSmallIntegerField(
-        help_text="Price in PLN for 1 in this currency"
-    )
-
-    def __str__(self) -> str:
-        return self.short_name
-
-
 class Cart(myAbstractModel):
     paid = models.BooleanField(default=False)
     sent = models.BooleanField(default=False)
+    # user = models.ForeignKey(
+    #     CustomUser, on_delete=models.CASCADE, default=None, null=True
+    # )
 
     def total_amount(self, currency):
         amount = 0
@@ -89,10 +93,15 @@ class Item(myAbstractModel):
         related_name="items",
     )
 
-    def price(self, currency):
-        if currency == "PLN":
+    @property
+    def price(self):
+        user = self.cart.user
+        if not user:
             return self._price
-        relation = Currencies.objects.get(short_name=currency).relation_to_PLN
+        currency = self.cart.user.currency
+        if not currency:
+            return self._price
+        relation = currency.relation_to_PLN
         return round(self.price / relation, 2)
 
     def __str__(self) -> str:

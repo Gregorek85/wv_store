@@ -8,4 +8,4 @@ from django.http.response import (
 
 
 def testView(request):
-    return JsonResponse({"message": "Test ok"}, status=200)
+    return render(request, "store/test.html")
