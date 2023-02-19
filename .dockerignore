@@ -1,6 +1,7 @@
 **/*.bat
 **/*.sqlite3
 **/*.txt
+**/*.md
 !requirements.txt
 Dockerfile
 .dockerignore
