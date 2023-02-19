@@ -1,6 +1,14 @@
+#Get the newest version 4 of Django.
 django>=4,<5
+#TBD if I really need celery for this project
 celery[redis]
+#For Postgresql database
 psycopg2-binary
+#Dependency needed for Django ImageField
 Pillow
+#Authorization and authentication using Google and Microsoft (other providers can be added in future)
 django-allauth
+#Bootstrap5 for CSS
 django-bootstrap5
+#Stripe for payments
+stripe

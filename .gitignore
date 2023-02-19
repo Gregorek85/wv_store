@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Some secrets are temporarily stored here for easy development:
+backend/backend/settings/secrets.py

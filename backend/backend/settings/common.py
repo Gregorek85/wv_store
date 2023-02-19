@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,15 +27,6 @@ SECRET_KEY = os.environ.get(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
-
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
-# AUTH_USER_MODEL = "accounts.CustomUser"
-
-if os.environ.get("ALLOWED_HOSTS") is not None:
-    try:
-        ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS").split(",")
-    except Exception as e:
-        print("Cant set ALLOWED_HOSTS, using default instead")
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -62,31 +53,6 @@ INSTALLED_APPS = [
     "store",
 ]
 SITE_ID = 1
-
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "APP": {"client_id": "YOUR_CLIENT_ID", "secret": "YOUR_SECRET_KEY", "key": ""},
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-    },
-    "microsoft": {
-        "APP": {"client_id": "YOUR_CLIENT_ID", "secret": "YOUR_SECRET_KEY", "key": ""},
-        "SCOPE": [
-            "User.Read",
-            "User.ReadBasic.All",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-    },
-}
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
